@@ -1,3 +1,5 @@
+import tevexxoLogo from '@/assets/tevexxo-logo.svg';
+
 type LogoProps = {
   size?: 'sm' | 'md' | 'lg';
   withText?: boolean;
@@ -10,15 +12,16 @@ export default function Logo({ size = 'md', withText = true }: LogoProps) {
   return (
     <div className="flex items-center gap-2.5 select-none">
       <div
-        className="relative flex items-center justify-center rounded-xl neon-orange-border bg-tevexxo-black-soft"
+        className="relative flex items-center justify-center rounded-xl neon-orange-border bg-tevexxo-black-soft overflow-hidden"
         style={{ width: dim, height: dim }}
       >
-        <span
-          className="font-display font-extrabold text-tevexxo-orange neon-orange-text"
-          style={{ fontSize: dim * 0.5 }}
-        >
-          T
-        </span>
+        <img
+          src={tevexxoLogo}
+          alt="Tevexxo"
+          className="w-full h-full"
+          style={{ objectFit: 'contain' }}
+          draggable={false}
+        />
       </div>
       {withText && (
         <span className={`font-display font-bold tracking-tight ${text} text-white`}>

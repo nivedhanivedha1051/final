@@ -1,5 +1,7 @@
 import { Sparkles, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useReveal } from '@/hooks/useReveal';
+import tevexxoLogo from '@/assets/tevexxo-logo.svg';
 
 export default function Hero() {
   const ref = useReveal<HTMLElement>();
@@ -43,12 +45,12 @@ export default function Hero() {
               Explore Courses
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </a>
-            <a
-              href="#services"
+            <Link
+              to="/services"
               className="inline-flex items-center gap-2 rounded-xl border border-tevexxo-orange/40 px-6 py-3 text-sm font-semibold text-neutral-200 transition-colors hover:border-tevexxo-orange hover:text-tevexxo-orange"
             >
               Our Services
-            </a>
+            </Link>
           </div>
 
           <div className="reveal reveal-delay-5 mt-10 flex items-center justify-center lg:justify-start gap-8 text-center">
@@ -80,10 +82,18 @@ function SpinningHeroMark() {
       {/* Outer glow */}
       <div className="absolute inset-0 rounded-full bg-tevexxo-orange/20 blur-3xl animate-pulse-glow" />
 
-      {/* Outer ring (clockwise) */}
+      {/* Outer ring (clockwise) with orbiting "Projects" badge */}
       <div className="absolute inset-0 rounded-full border-2 border-tevexxo-orange/70 neon-orange animate-spin-slow">
         <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-tevexxo-orange neon-orange" />
         <div className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-tevexxo-orange neon-orange" />
+        {/* Orbiting Projects badge — counter-rotates so text stays upright */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="animate-spin-slow-rev">
+            <span className="block -translate-y-[160px] sm:-translate-y-[200px] rounded-full bg-tevexxo-orange px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-black neon-orange whitespace-nowrap">
+              Projects
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Mid ring (counter-clockwise) */}
@@ -96,10 +106,14 @@ function SpinningHeroMark() {
 
       {/* Core */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="flex h-28 w-28 sm:h-36 sm:w-36 items-center justify-center rounded-2xl neon-orange-border bg-tevexxo-black-soft animate-float">
-          <span className="font-display text-6xl sm:text-7xl font-extrabold text-tevexxo-orange neon-orange-text">
-            T
-          </span>
+        <div className="flex h-28 w-28 sm:h-36 sm:w-36 items-center justify-center rounded-2xl neon-orange-border bg-tevexxo-black-soft animate-float overflow-hidden">
+          <img
+            src={tevexxoLogo}
+            alt="Tevexxo"
+            className="w-full h-full"
+            style={{ objectFit: 'contain' }}
+            draggable={false}
+          />
         </div>
       </div>
     </div>

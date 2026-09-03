@@ -1,30 +1,35 @@
+import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter, MessageCircle, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 
-const NAV = [
+type FooterLink =
+  | { label: string; to: string; kind: 'route' }
+  | { label: string; href: string; kind: 'anchor' };
+
+const NAV: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Company',
     links: [
-      { label: 'Support', href: '#contact' },
-      { label: 'Contact Us', href: '#contact' },
+      { label: 'Support', to: '/contact', kind: 'route' },
+      { label: 'Contact Us', to: '/contact', kind: 'route' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { label: 'Projects', href: '#projects' },
-      { label: 'Services', href: '#services' },
-      { label: 'Products', href: '#products' },
-      { label: 'Blogs', href: '#blog' },
+      { label: 'Projects', to: '/projects', kind: 'route' },
+      { label: 'Services', to: '/services', kind: 'route' },
+      { label: 'Products', to: '/products', kind: 'route' },
+      { label: 'Blogs', to: '/blog', kind: 'route' },
     ],
   },
   {
     title: 'Learning',
     links: [
-      { label: 'Courses', href: '#courses' },
-      { label: 'Programs', href: '#programs' },
-      { label: 'Why Tevexxo', href: '#why-tevexxo' },
-      { label: 'About Us', href: '#about' },
+      { label: 'Courses', href: '/#courses', kind: 'anchor' },
+      { label: 'Programs', href: '/#programs', kind: 'anchor' },
+      { label: 'Why Tevexxo', to: '/why-tevexxo', kind: 'route' },
+      { label: 'About Us', href: '/#about', kind: 'anchor' },
     ],
   },
 ];
@@ -74,16 +79,29 @@ export default function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a
-                      href={l.href}
-                      className="group inline-flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-tevexxo-orange"
-                    >
-                      {l.label}
-                      <ArrowUpRight
-                        size={13}
-                        className="opacity-0 transition-opacity group-hover:opacity-100"
-                      />
-                    </a>
+                    {l.kind === 'route' ? (
+                      <Link
+                        to={l.to}
+                        className="group inline-flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-tevexxo-orange"
+                      >
+                        {l.label}
+                        <ArrowUpRight
+                          size={13}
+                          className="opacity-0 transition-opacity group-hover:opacity-100"
+                        />
+                      </Link>
+                    ) : (
+                      <a
+                        href={l.href}
+                        className="group inline-flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-tevexxo-orange"
+                      >
+                        {l.label}
+                        <ArrowUpRight
+                          size={13}
+                          className="opacity-0 transition-opacity group-hover:opacity-100"
+                        />
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
